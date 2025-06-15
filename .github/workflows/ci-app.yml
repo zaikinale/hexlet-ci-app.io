@@ -1,0 +1,25 @@
+name: CI Pipeline
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        name: Setup, Lint and Test
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v4
+          - name: Setup Node
+            uses: actions/setup-node@v3
+            with:
+                node-version: '18'
+          - name: Run make setup
+            run: make setup
+          - name: Run make lint
+            run: make lint
+          - name: Run make test
+            run: make test
